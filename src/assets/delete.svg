@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Retângulo_15" data-name="Retângulo 15" width="16" height="16" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="删除_delete_1" data-name="删除_delete 1" clip-path="url(#clip-path)">
+    <path id="Caminho_24" data-name="Caminho 24" d="M3.75,4.167v11.34H13.756V4.167Z" transform="translate(-0.748 -0.831)" fill="none" stroke="#5d5f78" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Caminho_25" data-name="Caminho 25" d="M8.333,8.333v4.336" transform="translate(-1.663 -1.663)" fill="none" stroke="#5d5f78" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Caminho_26" data-name="Caminho 26" d="M11.667,8.333v4.336" transform="translate(-2.328 -1.663)" fill="none" stroke="#5d5f78" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Caminho_27" data-name="Caminho 27" d="M1.667,4.167H15.008" transform="translate(-0.333 -0.831)" fill="none" stroke="#5d5f78" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+    <path id="Caminho_28" data-name="Caminho 28" d="M6.667,3.668l1.1-2h3.165l1.075,2Z" transform="translate(-1.33 -0.333)" fill="none" stroke="#5d5f78" stroke-linejoin="round" stroke-width="1.5"/>
+  </g>
+</svg>
