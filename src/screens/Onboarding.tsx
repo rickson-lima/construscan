@@ -15,8 +15,10 @@ import { OnboardingStep } from "@/components/OnboardingStep";
 import { ScreenWrapper } from "@/components/ScreenWrapper";
 import { SHOW_ONBOARDING_KEY } from "@/constants/async-storage-keys.constants";
 import HelmetIcon from "@/assets/helmet.svg";
+import { useNavigation } from "@react-navigation/native";
 
 export function OnboardingScreen() {
+  const { navigate } = useNavigation()
   const secondaryColor = useToken("colors", "secondary");
   const opaqueSecondaryColor = useToken("colors", "opaqueSecondary");
 
@@ -28,7 +30,7 @@ export function OnboardingScreen() {
   async function handleFinishOnboarding() {
     try {
       await AsyncStorage.setItem(SHOW_ONBOARDING_KEY, "false");
-      console.log("vai para login");
+      navigate("signIn")
     } catch (error) {
       console.error(error);
     }
