@@ -6,12 +6,14 @@ import type { StackScreenProps } from "@react-navigation/stack";
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 
 export type RootStackParamList = {
+  // Auth
   onboarding: undefined;
   signIn: undefined;
   signUp: undefined;
-  recoverAccount: undefined;
   editUserData: undefined;
+  recoverAccount: undefined;
 
+  // App
   projectsList: undefined;
   project: undefined;
   editProject: undefined;

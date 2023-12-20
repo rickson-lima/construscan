@@ -33,6 +33,7 @@ export const gluestackUIConfig = createConfig({
       primary900: "##2A2C4D",
       secondary: "#5B67E7",
       opaqueSecondary: "#5B67E74D",
+      border100: "#E6E6EA",
 
       // Gluestack Theme Colors
       textLight900: "#262626",

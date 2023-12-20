@@ -1,4 +1,3 @@
-import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore";
 import { z } from "zod";
 
 const required_error = "Campo obrigatório";
@@ -24,8 +23,4 @@ export const userSchemaValidation = z
     }
   });
 
-export type IUserSchema = z.infer<typeof userSchemaValidation> & {
-  createdAt:
-    | FirebaseFirestoreTypes.Timestamp
-    | FirebaseFirestoreTypes.FieldValue;
-};
+export type IUserSchema = z.infer<typeof userSchemaValidation>;

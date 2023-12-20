@@ -1,77 +1,78 @@
-import { createStyle } from '@gluestack-style/react';
+import { createStyle } from "@gluestack-style/react";
 
 export const InputField = createStyle({
   flex: 1,
-  color: '$textLight900',
+  color: "$primary800",
+  fontWeight: "$medium",
   props: {
-    placeholderTextColor: '$textLight500',
+    placeholderTextColor: "$textLight500",
   },
   _dark: {
-    color: '$textDark50',
+    color: "$textDark50",
     props: {
-      placeholderTextColor: '$textDark400',
+      placeholderTextColor: "$textDark400",
     },
   },
   _web: {
-    'cursor': 'text',
-    ':disabled': {
-      cursor: 'not-allowed',
+    cursor: "text",
+    ":disabled": {
+      cursor: "not-allowed",
     },
   },
   variants: {
     size: {
-      '2xs': {
-        fontSize: '$2xs',
-        lineHeight: '$2xs',
+      "2xs": {
+        fontSize: "$2xs",
+        lineHeight: "$2xs",
       },
-      'xs': {
-        fontSize: '$xs',
-        lineHeight: '$sm',
-      },
-
-      'sm': {
-        fontSize: '$sm',
-        lineHeight: '$sm',
+      xs: {
+        fontSize: "$xs",
+        lineHeight: "$sm",
       },
 
-      'md': {
-        fontSize: '$md',
-        lineHeight: '$md',
+      sm: {
+        fontSize: "$sm",
+        lineHeight: "$sm",
       },
 
-      'lg': {
-        fontSize: '$lg',
-        lineHeight: '$xl',
+      md: {
+        fontSize: "$md",
+        lineHeight: "$md",
       },
 
-      'xl': {
-        fontSize: '$xl',
-        lineHeight: '$xl',
+      lg: {
+        fontSize: "$lg",
+        lineHeight: "$xl",
       },
 
-      '2xl': {
-        fontSize: '$2xl',
-        lineHeight: '$2xl',
+      xl: {
+        fontSize: "$xl",
+        lineHeight: "$xl",
       },
 
-      '3xl': {
-        fontSize: '$3xl',
-        lineHeight: '$3xl',
+      "2xl": {
+        fontSize: "$2xl",
+        lineHeight: "$2xl",
       },
 
-      '4xl': {
-        fontSize: '$4xl',
-        lineHeight: '$4xl',
+      "3xl": {
+        fontSize: "$3xl",
+        lineHeight: "$3xl",
       },
 
-      '5xl': {
-        fontSize: '$5xl',
-        lineHeight: '$6xl',
+      "4xl": {
+        fontSize: "$4xl",
+        lineHeight: "$4xl",
       },
 
-      '6xl': {
-        fontSize: '$6xl',
-        lineHeight: '$7xl',
+      "5xl": {
+        fontSize: "$5xl",
+        lineHeight: "$6xl",
+      },
+
+      "6xl": {
+        fontSize: "$6xl",
+        lineHeight: "$7xl",
       },
     },
   },

@@ -1,7 +1,7 @@
 import { ScreenWrapper } from "@/components/ScreenWrapper";
-import { Input, InputField } from '@gluestack-ui/themed'
+import { Input, InputField } from "@gluestack-ui/themed";
 
-export function SignInScreen() {
+export function SignUpScreen() {
   return (
     <ScreenWrapper>
       <Input
@@ -14,5 +14,5 @@ export function SignInScreen() {
         <InputField placeholder="Enter Text here" />
       </Input>
     </ScreenWrapper>
-  )
+  );
 }
