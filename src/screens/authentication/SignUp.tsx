@@ -1,5 +1,7 @@
 import { ScreenWrapper } from "@/components/ScreenWrapper";
 import { Input, InputField } from "@gluestack-ui/themed";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 export function SignUpScreen() {
   return (
