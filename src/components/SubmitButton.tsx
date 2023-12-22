@@ -4,14 +4,16 @@ type SubmitButtonProps = {
   children: React.ReactNode;
 } & React.ComponentProps<typeof Button>;
 
-export function SubmitButton({ children, ...rest }: SubmitButtonProps) {
+export function SubmitButton({ children, onPress, ...rest }: SubmitButtonProps) {
   return (
     <Button
       variant="solid"
-      bg="$secondary"
+      action="primary"
+      bg={"$secondary"}
       size="xl"
       rounded="$2xl"
       mt="$5"
+      $disabled-bg="$opaqueSecondary"
       {...rest}
     >
       <ButtonText color="$white" fontWeight="$normal" fontSize="$lg">
