@@ -1,86 +1,71 @@
-import { db } from '@/config/firebase.config';
-import { FIRESTORE_COLLECTIONS } from '@/constants/firestore-collections.constants';
-import { serverTimestamp } from "firebase/firestore";
-
-
+import { addDoc, serverTimestamp, collection } from "firebase/firestore";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import { FIRESTORE_COLLECTIONS } from "@/constants/firestore-collections.constants";
+import { SignUpSchema } from "@/schemas/authentication/sign-up.schema";
+import { auth, db } from "@/config/firebase.config";
+import { SigInSchema } from "@/schemas/authentication/sign-in.schema";
+import { UserFirestoreSchema } from "@/schemas/authentication/user-firestore.schema";
+import { useToast } from "./useToast";
+import { FORMS } from "@/constants/forms.constants";
+import { FormError } from "@/@types/forms";
 
 export function useAuthentication() {
+  const collectionRef = collection(db, FIRESTORE_COLLECTIONS.USERS);
+  const { showToast } = useToast();
 
-  const collection = firestore.collection(FIRESTORE_COLLECTIONS.USERS)
+  async function signUp(newUser: SignUpSchema): Promise<FormError | void> {
+    try {
+      const { user } = await createUserWithEmailAndPassword(
+        auth,
+        newUser.email,
+        newUser.password
+      );
 
-  function createUser(user: IUserSchema) {
-    user.createdAt = serverTimestamp();
+      await auth.updateCurrentUser(
+        Object.assign(user, { displayName: newUser.name })
+      );
 
-    auth().createUserWithEmailAndPassword(user.userEmail, user.passwd)
-      .then((userCredential) => {
-        userCredential.user.updateProfile({ displayName: user.userName })
-          .then(() => console.log("User display name was set"))
-          .catch(e => console.error(e));
-        console.log("User has been created. -- UID: " + userCredential.user.uid);
+      const data: UserFirestoreSchema = {
+        uid: user.uid,
+        name: newUser.name,
+        email: newUser.email,
+        createdAt: serverTimestamp(),
+      };
 
-        const userData: IUserFirebaseCollectionSchema = {
-          createdAt: user.createdAt,
-          id: user.id,
-          userEmail: user.userEmail,
-          userName: user.userName,
-          userRegister: user.userRegister
-        };
+      addDoc(collectionRef, data).catch((e) => console.error(e));
 
-        collection
-          .doc(userCredential.user.uid)
-          .set(userData)
-          .then(() => "User has been created at firestore.")
-      })
-      .catch((error) => {
-        console.log(`Error code: ${error.code}`);
-        console.log(`Error message: ${error.message}`);
-        console.log("<============================================>");
+      showToast({
+        message: FORMS.SUCCESS.USER_CREATED,
       });
+    } catch (error: any) {
+      showToast({
+        action: "error",
+        message: FORMS.ERRORS.UNABLE_TO_CREATE_USER,
+      });
+
+      if (error?.code === "auth/email-already-in-use")
+        return {
+          field: "email",
+          message: FORMS.ERRORS.EMAIL_ALREADY_IN_USE,
+        };
+    }
   }
 
-  function authenticateUser(
-    userAuth: ILoginSchema,
-  ): Promise<FirebaseAuthTypes.UserCredential> {
-    return auth().signInWithEmailAndPassword(
-      userAuth.userEmail,
-      userAuth.passwd,
-    );
+  function authenticateUser(userAuth: SigInSchema) {
+    return signInWithEmailAndPassword(auth, userAuth.email, userAuth.passwd);
   }
 
-  function signOut() {
-    auth().signOut()
-      .then(() => console.log("User has been logged off the app"))
-      .catch(e => console.error(e));
-  }
-
-  async function updateUser(data: IEditUserSchema) {
-    const currentUser = auth().currentUser!
-    const docReference = collection.doc(currentUser.uid);
-
-    await currentUser.updateEmail(data.userEmail);
-    await currentUser.updateProfile({ displayName: data.userName });
-    await docReference.update({ userName: data.userName, userEmail: data.userEmail });
-  }
-
-  async function updateUserPasswd(data: IResetPasswordSchema) {
-    const user = auth().currentUser!;
-    await user.updatePassword(data.passwd);
-  }
-
-  async function validateCurrentPassword(passwd: string) {
-    const user = auth().currentUser!;
-    const credential = auth.EmailAuthProvider.credential(
-      user.email!, passwd
-    );
-    await user.reauthenticateWithCredential(credential);
+  async function logout() {
+    return await signOut(auth);
   }
 
   return {
-    createUser,
+    signUp,
+    logout,
     authenticateUser,
-    signOut,
-    updateUser,
-    updateUserPasswd,
-    validateCurrentPassword
-  }
+  };
 }

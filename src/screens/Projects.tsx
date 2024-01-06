@@ -1,10 +1,12 @@
 import { ScreenWrapper } from "@/components/ScreenWrapper";
-import { Text } from '@gluestack-ui/themed'
+import { useAuthentication } from "@/hooks/useAuth";
+import { Text } from "@gluestack-ui/themed";
 
 export function ProjectsScreen() {
+  const { logout } = useAuthentication();
   return (
     <ScreenWrapper>
-      <Text>Oi</Text>
+      <Text onPress={logout}>Oi</Text>
     </ScreenWrapper>
-  )
+  );
 }

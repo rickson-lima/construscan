@@ -1,16 +1,17 @@
-import { FormsConstants } from "@/constants/forms.constants";
+import { FORMS } from "@/constants/forms.constants";
 import { z } from "zod";
 
 export const signUpValidation = z
   .object({
-    id: z.string({ required_error: FormsConstants.REQUIRED_FIELD }).uuid(),
-    name: z.string({ required_error: FormsConstants.REQUIRED_FIELD }),
-    email: z.string({ required_error: FormsConstants.REQUIRED_FIELD }),
+    name: z.string({ required_error: FORMS.ERRORS.REQUIRED_FIELD }),
+    email: z
+      .string({ required_error: FORMS.ERRORS.REQUIRED_FIELD })
+      .email({ message: "Digite um e-mail válido" }),
     password: z
-      .string({ required_error: FormsConstants.REQUIRED_FIELD })
+      .string({ required_error: FORMS.ERRORS.REQUIRED_FIELD })
       .min(6, "A senha deve ter pelo menos 6 caracteres."),
     passwordConfirmation: z.string({
-      required_error: FormsConstants.REQUIRED_FIELD,
+      required_error: FORMS.ERRORS.REQUIRED_FIELD,
     }),
   })
   .superRefine((args, ctx) => {
