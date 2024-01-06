@@ -1,80 +1,30 @@
-import { createStyle } from '@gluestack-style/react';
+import { createStyle } from "@gluestack-style/react";
 
 export const Toast = createStyle({
-  px: '$4',
-  py: '$3',
-  borderRadius: '$sm',
-  flexDirection: 'row',
+  px: "$4",
+  py: "$3",
+  flexDirection: "row",
   variants: {
     action: {
       error: {
-        bg: '$backgroundLightError',
-        borderColor: '$error300',
+        bg: "$error700",
+        borderColor: "$error300",
         _icon: {
-          color: '$error500',
-        },
-        _dark: {
-          bg: '$backgroundDarkError',
-          borderColor: '$error700',
-          _icon: {
-            color: '$error500',
-          },
-        },
-      },
-      warning: {
-        bg: '$backgroundLightWarning',
-        borderColor: '$warning300',
-        _icon: {
-          color: '$warning500',
-        },
-        _dark: {
-          bg: '$backgroundDarkWarning',
-          borderColor: '$warning700',
-          _icon: {
-            color: '$warning500',
-          },
+          color: "$error500",
         },
       },
       success: {
-        bg: '$backgroundLightSuccess',
-        borderColor: '$success300',
+        bg: "$green900",
+        borderColor: "$green900",
         _icon: {
-          color: '$success500',
-        },
-        _dark: {
-          bg: '$backgroundDarkSuccess',
-          borderColor: '$success700',
-          _icon: {
-            color: '$warning500',
-          },
+          color: "$success500",
         },
       },
       info: {
-        bg: '$backgroundLightInfo',
-        borderColor: '$info300',
+        bg: "$secondary",
+        borderColor: "$secondary",
         _icon: {
-          color: '$info500',
-        },
-        _dark: {
-          bg: '$backgroundDarkInfo',
-          borderColor: '$info700',
-          _icon: {
-            color: '$info500',
-          },
-        },
-      },
-      attention: {
-        bg: '$backgroundLightMuted',
-        borderColor: '$secondary300',
-        _icon: {
-          color: '$secondary600',
-        },
-        _dark: {
-          bg: '$backgroundDarkMuted',
-          borderColor: '$secondary700',
-          _icon: {
-            color: '$secondary400',
-          },
+          color: "$white",
         },
       },
     },
@@ -82,25 +32,19 @@ export const Toast = createStyle({
     variant: {
       solid: {},
       outline: {
-        borderWidth: '$1',
-        bg: '$white',
-        _dark: {
-          bg: '$black',
-        },
+        borderWidth: "$1",
+        bg: "$white",
       },
       accent: {
-        borderLeftWidth: '$4',
+        borderLeftWidth: "$4",
       },
     },
   },
-  m: '$3',
+  mt: "$10",
 
-  _web: {
-    pointerEvents: 'auto',
-  },
   defaultProps: {
-    hardShadow: '5',
-    variant: 'solid',
-    action: 'attention',
+    hardShadow: "5",
+    variant: "solid",
+    action: "success",
   },
 });
