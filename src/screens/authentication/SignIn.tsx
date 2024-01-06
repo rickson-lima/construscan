@@ -1,12 +1,12 @@
 import { LabeledInput } from "@/components/LabeledInput";
 import { ScreenWrapper } from "@/components/ScreenWrapper";
+import { SubmitButton } from "@/components/SubmitButton";
 import {
   Button,
   ButtonText,
   EyeIcon,
   EyeOffIcon,
   HStack,
-  Input,
   InputField,
   InputIcon,
   InputSlot,
@@ -48,27 +48,15 @@ export function SignInScreen() {
         </LabeledInput>
 
         <Button
-          size="xs"
+          variant="link"
           alignSelf="flex-end"
           mt="-$3"
           onPress={() => navigate("recoverAccount")}
         >
-          <ButtonText fontSize="$sm" color="$primary800">
-            Esqueci minha senha
-          </ButtonText>
+          <ButtonText color="$primary800">Esqueci minha senha</ButtonText>
         </Button>
 
-        <Button
-          variant="solid"
-          bg="$secondary"
-          size="xl"
-          rounded="$2xl"
-          mt="$5"
-        >
-          <ButtonText color="$white" fontWeight="$normal" fontSize="$lg">
-            Entrar
-          </ButtonText>
-        </Button>
+        <SubmitButton>Entrar</SubmitButton>
       </VStack>
 
       <HStack
@@ -81,14 +69,8 @@ export function SignInScreen() {
         <Text color="$primary800" fontSize="$sm">
           Não tem uma conta?{" "}
         </Text>
-        <Button size="xs" ml="-$3">
-          <ButtonText
-            color="$secondary"
-            fontSize="$sm"
-            onPress={() => navigate("signUp")}
-          >
-            Cadastre-se
-          </ButtonText>
+        <Button variant="link" ml="-$2" onPress={() => navigate("signUp")}>
+          <ButtonText>Cadastre-se</ButtonText>
         </Button>
       </HStack>
     </ScreenWrapper>
