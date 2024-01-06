@@ -1,57 +1,81 @@
-import { useState } from 'react'
-import { InputIcon, FormControl, FormControlError, InputSlot, FormControlErrorText, Input, InputField, EyeIcon, EyeOffIcon, HStack, Text } from '@gluestack-ui/themed'
+import { useState } from "react";
+import {
+  InputIcon,
+  FormControl,
+  FormControlError,
+  InputSlot,
+  FormControlErrorText,
+  Input,
+  InputField,
+  EyeIcon,
+  EyeOffIcon,
+  FormControlLabel,
+  FormControlLabelText,
+} from "@gluestack-ui/themed";
+import { UseControllerProps, useController } from "react-hook-form";
 
-type FormInputProps = {
-  type?: "password" | "text"
-  label: string
-  error?: string
-}
+type FormInputProps = UseControllerProps<any> & {
+  label: string;
+  type?: "password" | "text";
+  isDisabled?: boolean;
+};
 
-export function FormInput({ type = "text", error, label }: FormInputProps) {
-  const [showPassword, setShowPassword] = useState(false)
+export function FormInput({
+  label,
+  type = "text",
+  isDisabled = false,
+  ...controller
+}: FormInputProps) {
+  const { field, fieldState } = useController(controller);
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const hasError = !!fieldState.error?.message;
 
   function togglePasswordVisibility() {
-    setShowPassword((prev) => !prev)
+    setShowPassword((prev) => !prev);
   }
 
   return (
-    <FormControl>
-      <HStack width="$full">
-        <Text
+    <FormControl isInvalid={hasError} isDisabled={isDisabled}>
+      <FormControlLabel zIndex={999}>
+        <FormControlLabelText
           position="absolute"
           left="$2"
-          top="-$2.5"
+          top="-$2"
           px="$1"
-          zIndex={999}
           bg="$white"
           size="xs"
         >
           {label}
-        </Text>
+        </FormControlLabelText>
+      </FormControlLabel>
 
-        <Input
-          width="$full"
-          size="lg"
-          variant="outline"
-          rounded="$lg"
-          borderColor="$border100"
+      <Input width="$full" size="lg" variant="outline" rounded="$lg">
+        <InputField
+          size="sm"
+          onChangeText={field.onChange}
+          fontWeight="$medium"
+          type={type === "text" || showPassword ? "text" : "password"}
+        />
+
+        <InputSlot
+          pr="$3"
+          onPress={togglePasswordVisibility}
+          display={type === "password" ? "flex" : "none"}
         >
-          <InputField size="sm" fontWeight="$medium" type={showPassword ? "password" : "text"} />
-
-          <InputSlot pr="$3" onPress={togglePasswordVisibility} display={type === "password" ? "flex" : "none"}>
-            <InputIcon
-              as={showPassword ? EyeIcon : EyeOffIcon}
-              color="$primary300"
-            />
-          </InputSlot>
-        </Input>
-      </HStack>
+          <InputIcon
+            as={showPassword ? EyeIcon : EyeOffIcon}
+            color="$primary300"
+          />
+        </InputSlot>
+      </Input>
 
       <FormControlError>
-        <FormControlErrorText>
-          {error}
+        <FormControlErrorText size="xs">
+          {fieldState.error?.message}
         </FormControlErrorText>
       </FormControlError>
     </FormControl>
-  )
+  );
 }
