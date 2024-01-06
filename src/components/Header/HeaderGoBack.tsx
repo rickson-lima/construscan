@@ -5,8 +5,8 @@ export function HeaderGoBack() {
   const { goBack } = useNavigation();
 
   return (
-    <Button onPress={goBack} size="xs" width="$8">
-      <ButtonIcon size="xl" as={ChevronLeftIcon} />
+    <Button onPress={goBack} size="xs" width="$8" bg="$transparent">
+      <ButtonIcon color="$primary800" size="xl" as={ChevronLeftIcon} />
     </Button>
   );
 }

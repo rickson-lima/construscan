@@ -29,6 +29,7 @@ export const gluestackUIConfig = createConfig({
     colors: {
       // Custom colors
       primary300: "#5D5F78",
+      primary700: "#292C4F",
       primary800: "#292C4F",
       primary900: "##2A2C4D",
       secondary: "#5B67E7",
