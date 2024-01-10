@@ -45,7 +45,7 @@ export function SignUpScreen() {
   return (
     <ScrollView
       automaticallyAdjustKeyboardInsets
-      showsVerticalScrollIndicator={true}
+      showsVerticalScrollIndicator={false}
       contentContainerStyle={{ flexGrow: 1 }}
     >
       <ScreenWrapper justifyContent="space-between">

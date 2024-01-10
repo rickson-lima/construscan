@@ -55,8 +55,28 @@ export function useAuthentication() {
     }
   }
 
-  function authenticateUser(userAuth: SigInSchema) {
-    return signInWithEmailAndPassword(auth, userAuth.email, userAuth.passwd);
+  async function signIn(data: SigInSchema): Promise<FormError[] | void> {
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+    } catch (error) {
+      showToast({
+        message: FORMS.ERRORS.UNABLE_TO_SIGN_IN,
+        action: "error",
+      });
+
+      console.error(error);
+
+      return [
+        {
+          field: "email",
+          message: FORMS.ERRORS.INVALID_CREDENTIALS,
+        },
+        {
+          field: "password",
+          message: FORMS.ERRORS.INVALID_CREDENTIALS,
+        },
+      ];
+    }
   }
 
   async function logout() {
@@ -66,6 +86,6 @@ export function useAuthentication() {
   return {
     signUp,
     logout,
-    authenticateUser,
+    signIn,
   };
 }

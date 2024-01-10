@@ -5,7 +5,7 @@ export const signInValidation = z.object({
   email: z
     .string({ required_error: FORMS.ERRORS.REQUIRED_FIELD })
     .min(1, FORMS.ERRORS.REQUIRED_FIELD),
-  passwd: z
+  password: z
     .string({ required_error: FORMS.ERRORS.REQUIRED_FIELD })
     .min(1, FORMS.ERRORS.REQUIRED_FIELD),
 });

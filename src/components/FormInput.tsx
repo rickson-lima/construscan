@@ -13,15 +13,18 @@ import {
   FormControlLabelText,
 } from "@gluestack-ui/themed";
 import { UseControllerProps, useController } from "react-hook-form";
+import { ViewProps } from "react-native";
 
 type FormInputProps = UseControllerProps<any> & {
   label: string;
+  ref?: React.Ref<ViewProps>;
   type?: "password" | "text";
   isDisabled?: boolean;
 };
 
 export function FormInput({
   label,
+  ref,
   type = "text",
   isDisabled = false,
   ...controller
@@ -51,7 +54,7 @@ export function FormInput({
         </FormControlLabelText>
       </FormControlLabel>
 
-      <Input width="$full" size="lg" variant="outline" rounded="$lg">
+      <Input ref={ref} width="$full" size="lg" variant="outline" rounded="$lg">
         <InputField
           size="sm"
           onChangeText={field.onChange}
