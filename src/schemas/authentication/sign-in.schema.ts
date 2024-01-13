@@ -1,13 +1,14 @@
 import { FORMS } from "@/constants/forms.constants";
+import { FieldValues } from "react-hook-form";
 import { z } from "zod";
 
 const { ERRORS, FIELDS } = FORMS;
 
 export const signInValidation = z.object({
-  [FIELDS.EMAIL]: z
+  email: z
     .string({ required_error: ERRORS.REQUIRED_FIELD })
     .min(1, FORMS.ERRORS.REQUIRED_FIELD),
-  [FIELDS.PASSWORD]: z
+  password: z
     .string({ required_error: ERRORS.REQUIRED_FIELD })
     .min(1, FORMS.ERRORS.REQUIRED_FIELD),
 });

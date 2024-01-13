@@ -1,46 +1,55 @@
-import { useState } from "react";
 import {
-  InputIcon,
-  FormControl,
-  FormControlError,
-  InputSlot,
-  FormControlErrorText,
-  Input,
-  InputField,
   EyeIcon,
   EyeOffIcon,
+  FormControl,
+  FormControlError,
+  FormControlErrorText,
   FormControlLabel,
   FormControlLabelText,
+  Input,
+  InputField,
+  InputIcon,
+  InputSlot,
 } from "@gluestack-ui/themed";
-import { UseControllerProps, useController } from "react-hook-form";
-import { ViewProps } from "react-native";
+import { useState } from "react";
+import {
+  Control,
+  FieldPath,
+  FieldValues,
+  useController,
+} from "react-hook-form";
 
-type FormInputProps = UseControllerProps<any> & {
+interface FormInputProps<
+  TFieldValues extends FieldValues = FieldValues,
+  TFieldName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+> {
+  name: TFieldName; // This successfully typechecks the name, but doesn't restrict which type it points to
+  control: Control<TFieldValues>;
   label: string;
-  ref?: React.Ref<ViewProps>;
   type?: "password" | "text";
   isDisabled?: boolean;
-};
+}
 
-export function FormInput({
+export function FormInput<
+  TFieldValues extends FieldValues = FieldValues,
+  TFieldName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+>({
+  control,
+  name,
   label,
-  ref,
   type = "text",
   isDisabled = false,
-  ...controller
-}: FormInputProps) {
-  const { field, fieldState } = useController(controller);
+}: FormInputProps<TFieldValues, TFieldName>) {
+  const { field, fieldState } = useController({ control, name });
 
   const [showPassword, setShowPassword] = useState(false);
-
-  const hasError = !!fieldState.error?.message;
 
   function togglePasswordVisibility() {
     setShowPassword((prev) => !prev);
   }
 
   return (
-    <FormControl isInvalid={hasError} isDisabled={isDisabled}>
+    <FormControl isInvalid={fieldState.invalid} isDisabled={isDisabled}>
       <FormControlLabel zIndex={999}>
         <FormControlLabelText
           position="absolute"
@@ -54,7 +63,7 @@ export function FormInput({
         </FormControlLabelText>
       </FormControlLabel>
 
-      <Input ref={ref} width="$full" size="lg" variant="outline" rounded="$lg">
+      <Input width="$full" size="lg" variant="outline" rounded="$lg">
         <InputField
           size="sm"
           onChangeText={field.onChange}

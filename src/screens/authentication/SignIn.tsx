@@ -7,13 +7,12 @@ import {
   VStack,
 } from "@gluestack-ui/themed";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigation, useScrollToTop } from "@react-navigation/native";
-import { useRef, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { FormInput } from "@/components/FormInput";
 import { Logo } from "@/components/Logo";
-import { Sample } from "@/components/Sample";
 import { ScreenWrapper } from "@/components/ScreenWrapper";
 import { SubmitButton } from "@/components/SubmitButton";
 import { useAuthentication } from "@/hooks/useAuth";
@@ -59,8 +58,8 @@ export function SignInScreen() {
             <FormInput
               label="Senha"
               type="password"
-              control={control}
               name="password"
+              control={control}
             />
 
             <Button
