@@ -1,4 +1,4 @@
-export type FormError = {
+interface FormError {
   field: string;
   message: string;
-};
+}

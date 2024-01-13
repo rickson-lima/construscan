@@ -92,7 +92,7 @@ export function SignUpScreen() {
         <SubmitButton
           mt="$8"
           isLoading={isLoading}
-          isDisabled={!formState.isDirty}
+          // isDisabled={!formState.isDirty}
           onPress={handleSubmit(onSubmitNewUser)}
         >
           Criar

@@ -11,7 +11,6 @@ import { SigInSchema } from "@/schemas/authentication/sign-in.schema";
 import { UserFirestoreSchema } from "@/schemas/authentication/user-firestore.schema";
 import { useToast } from "./useToast";
 import { FORMS } from "@/constants/forms.constants";
-import { FormError } from "@/@types/forms";
 
 export function useAuthentication() {
   const collectionRef = collection(db, FIRESTORE_COLLECTIONS.USERS);
@@ -49,7 +48,7 @@ export function useAuthentication() {
 
       if (error?.code === "auth/email-already-in-use")
         return {
-          field: "email",
+          field: FORMS.FIELDS.EMAIL,
           message: FORMS.ERRORS.EMAIL_ALREADY_IN_USE,
         };
     }
@@ -68,11 +67,11 @@ export function useAuthentication() {
 
       return [
         {
-          field: "email",
+          field: FORMS.FIELDS.EMAIL,
           message: FORMS.ERRORS.INVALID_CREDENTIALS,
         },
         {
-          field: "password",
+          field: FORMS.FIELDS.PASSWORD,
           message: FORMS.ERRORS.INVALID_CREDENTIALS,
         },
       ];
